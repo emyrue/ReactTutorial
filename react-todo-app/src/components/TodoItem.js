@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 function TodoItem(props) {
-  const { todo, handleChangeProps } = props;
+  const { todo, handleChangeProps, deleteTodoProps } = props;
   const { title, completed, id } = todo;
   return (
     <li>
@@ -11,6 +11,12 @@ function TodoItem(props) {
         checked={completed}
         onChange={() => handleChangeProps(id)}
       />
+      <button
+        type="button"
+        onClick={() => deleteTodoProps(id)}
+      >
+        Delete
+      </button>
       {title}
     </li>
   );
@@ -25,4 +31,5 @@ TodoItem.propTypes = {
     completed: PropTypes.bool.isRequired,
   }).isRequired,
   handleChangeProps: PropTypes.func.isRequired,
+  deleteTodoProps: PropTypes.func.isRequired,
 };

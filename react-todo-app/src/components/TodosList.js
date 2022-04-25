@@ -5,31 +5,20 @@ import TodoItem from './TodoItem';
 class TodosList extends React.Component {
   constructor(props) {
     super(props);
-    const { todos } = props;
-    this.state = {
-      todos,
-    };
-    this.handleChange = this.handleChange.bind(this);
-  }
-
-  handleChange = (id) => {
-    this.setState((prevState) => {
-      prevState.todos.map((todo) => {
-        const object = todo;
-        if (object.id === id) {
-          object.completed = !object.completed;
-        }
-        return todo;
-      });
-    });
+    this.state = {};
   }
 
   render() {
-    const { todos } = this.state;
+    const { todos, handleChangeProps, deleteTodoProps } = this.props;
     return (
       <ul>
         {todos.map((todo) => (
-          <TodoItem key={todo.id} todo={todo} handleChangeProps={this.handleChange} />
+          <TodoItem
+            key={todo.id}
+            todo={todo}
+            handleChangeProps={handleChangeProps}
+            deleteTodoProps={deleteTodoProps}
+          />
         ))}
       </ul>
     );
@@ -42,6 +31,8 @@ TodosList.propTypes = {
     title: PropTypes.string.isRequired,
     completed: PropTypes.bool.isRequired,
   })).isRequired,
+  handleChangeProps: PropTypes.func.isRequired,
+  deleteTodoProps: PropTypes.func.isRequired,
 };
 
 export default TodosList;
