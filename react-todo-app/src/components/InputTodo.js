@@ -13,10 +13,14 @@ class InputTodo extends React.Component {
     const { addTodoProps } = this.props;
     const { title } = this.state;
     e.preventDefault();
-    addTodoProps(title);
-    this.setState({
-      title: '',
-    });
+    if (title.trim()) {
+      addTodoProps(title);
+      this.setState({
+        title: '',
+      });
+    } else {
+      alert('Input cannot be empty');
+    }
   }
 
   onChange = (e) => {
@@ -28,15 +32,16 @@ class InputTodo extends React.Component {
   render() {
     const { title } = this.state;
     return (
-      <form onSubmit={this.handleSubmit}>
+      <form onSubmit={this.handleSubmit} className="form-container">
         <input
           type="text"
+          className="input-text"
           placeholder="Add Todo..."
           value={title}
           name="title"
           onChange={this.onChange}
         />
-        <button type="submit">Submit</button>
+        <button className="input-submit" type="submit">Submit</button>
       </form>
     );
   }
